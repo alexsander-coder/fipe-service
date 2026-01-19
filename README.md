@@ -14,6 +14,28 @@ O projeto foi desenvolvido como teste técnico, com foco em:
 - design correto das classes e regras de negócio
 
 
+## Pré-requisitos
+
+Antes de executar o Backend, é necessário ter instalado na máquina:
+
+- **Java 17**
+- **Maven 3.8+**
+
+> O projeto foi desenvolvido e testado utilizando Java 17.
+
+## Clonando o Repositório
+
+1. Clone o repositório para sua máquina local:
+
+```bash
+git clone https://github.com/alexsander-coder/fipe-service.git
+```
+
+2. Acesse a pasta do projeto:
+```bash
+cd fipe-service
+```
+
 ## Funcionalidades
 
 - Consumo da **API FIPE v2**
