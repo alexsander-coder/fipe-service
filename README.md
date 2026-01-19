@@ -32,6 +32,60 @@ O projeto foi desenvolvido como teste técnico, com foco em:
 - Comunicação externa desacoplada por meio de clientes dedicados
 - Código orientado à legibilidade e fácil manutenção
 
+
+## Decisão Arquitetural e Responsabilidade do Endpoint
+
+Este microsserviço foi estruturado seguindo princípios de **Clean Architecture** e **Domain-Driven Design (DDD)**, mantendo uma separação clara entre **domínio**, **casos de uso** e **infraestrutura**.
+
+O endpoint exposto pelo backend possui **responsabilidade única** e está diretamente relacionado ao domínio do problema proposto no desafio.
+
+### Responsabilidades do endpoint
+
+O endpoint é responsável por:
+
+- Orquestrar chamadas à API pública da Tabela FIPE
+- Consolidar os valores históricos de um veículo ao longo dos anos
+- Aplicar regras de negócio do domínio, incluindo:
+  - Cálculo da variação absoluta de preço
+  - Cálculo da variação percentual entre os anos
+- Retornar os dados já **processados e prontos para consumo**, sem delegar regras de negócio ao frontend
+
+Toda a lógica de negócio, cálculos e regras do domínio estão **centralizadas na camada de domínio/aplicação**, garantindo:
+
+- Consistência dos cálculos
+- Reutilização de regras
+- Facilidade de manutenção e evolução
+- Independência de frameworks e de detalhes de infraestrutura
+
+---
+
+## Consumo direto da API FIPE no frontend
+
+
+As informações de **marcas** e **modelos** são consumidas **diretamente pelo frontend** a partir da API pública da Tabela FIPE.
+
+Essa decisão foi tomada de forma intencional e estratégica, considerando que:
+
+- São dados **públicos, estáticos e sem regra de negócio**
+- Não fazem parte do **domínio central** do problema
+- Não exigem validação, transformação ou cálculo
+- Não agregariam valor ao domínio caso fossem encapsulados no backend
+
+Encapsular essas chamadas no backend resultaria apenas em um **proxy de dados**, o que é considerado um *anti-pattern* em arquiteturas orientadas a domínio, por introduzir complexidade sem benefício real.
+
+---
+
+## Benefícios da abordagem adotada
+
+- Backend focado exclusivamente em **regras de negócio e casos de uso**
+- Redução de acoplamento entre frontend e backend
+- Menor volume de código redundante
+- Arquitetura mais simples, clara e sustentável
+- Aderência aos princípios **SRP (Single Responsibility Principle)**
+
+---
+
+
 ## Exemplo de Requisição
 
 **Request**
